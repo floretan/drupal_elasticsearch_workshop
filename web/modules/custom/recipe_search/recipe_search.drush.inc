@@ -65,7 +65,10 @@ function drush_recipe_search_import_recipes() {
        */
 
       $response = $client->index([
-        // Put the parameters here
+        'index' => $index_name,
+        'type' => $type_name,
+        'id' => $id,
+        'body' => $recipe,
       ]);
 
       /**
