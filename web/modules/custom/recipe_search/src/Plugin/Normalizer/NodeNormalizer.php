@@ -30,11 +30,20 @@ class NodeNormalizer extends ContentEntityNormalizer {
   public function normalize($object, $format = NULL, array $context = array()) {
     /** @var Node $object */
 
-    $data = parent::normalize($object, $format, $context);
-
     /**
      * TASK 6: Structure your data however you want to index it.
      */
+    $data =  [
+      'id' => $object->id(),
+      'name' => $object->getTitle(),
+      'description' => $object->body->value,
+      'url' => $object->url(),
+      'source' => 'Drupal',
+    ];
+
+    foreach ($object->field_ingredients as $ingredient) {
+      $data['ingredients'][] = $ingredient->value;
+    }
 
     return $data;
   }
