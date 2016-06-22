@@ -11,6 +11,10 @@
     ],
     "repositories": [
         {
+            "type": "vcs",
+            "url": "https://git.drupal.org/project/elasticsearch_helper.git"
+        },
+        {
             "type": "composer",
             "url": "https://packagist.drupal-composer.org"
         }
@@ -24,7 +28,8 @@
         "drupal/console": "~0.10",
         "drupal/devel": "8.*",
         "elasticsearch/elasticsearch": "^2.2",
-        "drupal/config_installer": "8.*"
+        "drupal/config_installer": "8.*",
+        "drupal/elasticsearch_helper": "*"
     },
     "require-dev": {
        "behat/mink": "~1.7",

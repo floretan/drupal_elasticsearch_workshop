@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "d1994bbece40cd748a404580c1c8878d",
-    "content-hash": "a0cde62b04293bfecb14b66590cf83a5",
+    "hash": "90eb3b4fe82432e5fed07ec2b2075fd2",
+    "content-hash": "a725bcc84c26ffde288dc047c148eeba",
     "packages": [
         {
             "name": "alchemy/zippy",
@@ -758,7 +758,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://ftp.drupal.org/files/projects/config_installer-8.x-1.3.zip",
-                "reference": null,
+                "reference": "071213c9a7507bddcd6f6018d3f24217c13bb9d7",
                 "shasum": null
             },
             "require": {
@@ -1073,6 +1073,30 @@
             "description": "Various blocks, pages, and functions for developers.",
             "homepage": "http://drupal.org/project/devel",
             "time": "2016-06-06 06:59:02"
+        },
+        {
+            "name": "drupal/elasticsearch_helper",
+            "version": "dev-8.x-1.x",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupal.org/project/elasticsearch_helper.git",
+                "reference": "3e45a15729756a64e60e7870c06610b41a4440ab"
+            },
+            "require": {
+                "elasticsearch/elasticsearch": "^2.1"
+            },
+            "type": "drupal-module",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "Florian Loretan",
+                    "email": "florian.loretan@wunderkraut.com"
+                }
+            ],
+            "description": "Provide tools to integrate elasticsearch with Drupal.",
+            "time": "2016-06-13 13:07:01"
         },
         {
             "name": "drush/drush",
