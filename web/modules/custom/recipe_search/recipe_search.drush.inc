@@ -39,6 +39,9 @@ function drush_recipe_search_import_recipes() {
     // Don't do anything.
   }
 
+  // These are not really ingreadients.
+  $irrelevant_ingredients = ['to', 'and', 'or', 'of', 'for', 'with', 'cup', 'cups', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'bunch', 'ounce', 'ounces', 'tablespoon', 'tablespoons', 'tablespons', 'tbsp', 'tbs', 'teaspoon', 'teaspoons', 'tsp', 'pinch', 'taste', 'none', 'warm', 'cold', 'whole', 'weight', 'clove', 'cloves', 'pound', 'can', 'cans', 'package', 'slices', 'chopped', 'stick', 'sticks', 'ground', 'large', 'fluid', 'fresh', 'dash', 'piece', 'pieces', 'box'];
+
   /**
    * TASK #2: Explicitly set the schema.
    *
