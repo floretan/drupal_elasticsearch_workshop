@@ -92,7 +92,7 @@ class RecipeSearchAPIController extends ControllerBase {
             ],
           ],
           'ingredients' => [
-            'terms' => [
+            'significant_terms' => [
               'field' => 'ingredients'
             ],
           ],
