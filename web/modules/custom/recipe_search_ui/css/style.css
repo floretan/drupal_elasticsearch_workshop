@@ -1,0 +1,7 @@
+md-list#vertical-container {
+  min-height: 800px;
+}
+.md-virtual-repeat-container {
+  min-height: 800px;
+  width: 100%;
+}

@@ -1,0 +1,41 @@
+recipe_search_ui:
+  version: 0
+  js:
+    js/controller.js: {}
+  css:
+    theme:
+      css/style.css: {}
+  dependencies:
+    - recipe_search_ui/angular
+    - recipe_search_ui/angular-animate
+    - recipe_search_ui/angular-aria
+    - recipe_search_ui/angular-material
+    - recipe_search_ui/angular-messages
+    - recipe_search_ui/angular-resource
+
+angular:
+  js:
+    /libraries/angular/angular.min.js: {}
+
+angular-animate:
+  js:
+    /libraries/angular-animate/angular-animate.min.js: {}
+
+angular-aria:
+  js:
+    /libraries/angular-aria/angular-aria.min.js: {}
+
+angular-material:
+  js:
+    /libraries/angular-material/angular-material.min.js: {}
+  css:
+    theme:
+      /libraries/angular-material/angular-material.min.css: {}
+
+angular-messages:
+  js:
+    /libraries/angular-messages/angular-messages.min.js: {}
+
+angular-resource:
+  js:
+    /libraries/angular-resource/angular-resource.min.js: {}

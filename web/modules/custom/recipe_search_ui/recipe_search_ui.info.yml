@@ -1,0 +1,7 @@
+name: recipe_search_ui
+type: module
+description: Recipe Search UI
+core: 8.x
+package: Custom
+dependencies:
+  - recipe_search

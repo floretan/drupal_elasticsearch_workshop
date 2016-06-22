@@ -1,0 +1,95 @@
+{% verbatim %}
+<div ng-controller="AppCtrl as app">
+
+  <section layout="row" flex>
+    <md-sidenav
+      class="md-sidenav-left"
+      md-component-id="left"
+      md-is-locked-open="$mdMedia('gt-md')"
+      md-disable-backdrop
+      md-whiteframe="4">
+
+      <md-content layout-padding>
+        <form name="searchForm" ng-submit="app.updateSearchResults()">
+          <md-autocomplete
+            md-selected-item="app.selectedItem"
+            md-search-text="app.searchInput"
+            md-items="item in app.getSearchSuggestions(app.searchInput)"
+            md-item-text="item.label"
+            md-selected-item-change="app.updateSearchResults()"
+            placeholder="Enter ingredients">
+            <span md-highlight-text="app.searchInput">{{item.label}}</span>
+          </md-autocomplete>
+
+
+          <div ng-show="app.ingredientsFacet.length">
+            <h3 class="md-headline">Ingredients</h3>
+            <md-list>
+              <md-list-item ng-repeat="facetValue in app.ingredientsFacet">
+                <md-checkbox ng-model="app.searchParams.ingredients[facetValue.key]" ></md-checkbox>
+                <div class="md-list-item-text">
+                  {{facetValue.key}} ({{facetValue.doc_count}})
+                </div>
+              </md-list-item>
+            </md-list>
+          </div>
+
+          <div ng-show="app.sourceFacet.length">
+            <h3 class="md-headline">Source</h3>
+            <md-list>
+              <md-list-item ng-repeat="facetValue in app.sourceFacet">
+                <md-checkbox ng-model="app.searchParams.sources[facetValue.key]" ></md-checkbox>
+                <div class="md-list-item-text">
+                  {{facetValue.key}} ({{facetValue.doc_count}})
+                </div>
+              </md-list-item>
+            </md-list>
+          </div>
+
+        </form>
+
+
+      </md-content>
+    </md-sidenav>
+
+    <md-content flex>
+
+      <md-toolbar class="md-hue-1">
+        <div class="md-toolbar-tools">
+          <md-button class="md-icon-button" aria-label="Search" ng-click="app.toggleSidebar()" hide-gt-md>
+            <md-icon md-svg-icon="icons/menu.svg"></md-icon>
+          </md-button>
+          <span flex></span>
+          <div ng-show="app.searchResult.hits.length">{{app.searchResult.total}} results for {{app.searchParams.input}}</div>
+        </div>
+      </md-toolbar>
+
+
+      <md-progress-linear ng-show="app.loadingSearchResults && !app.searchResult.hits.length" md-mode="indeterminate"></md-progress-linear>
+      <md-list>
+        <md-virtual-repeat-container id="vertical-container">
+          <md-card md-virtual-repeat="item in app.infiniteItems" md-on-demand md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }}" md-theme-watch>
+            <md-card-title>
+              <md-card-title-text>
+                <span class="md-headline">{{item.name}}</span>
+                <span class="md-subhead"><a href="{{item.url}}" target="_blank">{{item.source}}</a></span>
+              </md-card-title-text>
+
+            </md-card-title>
+            <md-card-content>
+              <p>{{item.description}}</p>
+            </md-card-content>
+            <md-card-actions layout="row" layout-align="end center">
+              <md-button class="md-icon-button" aria-label="Favorite">
+                <md-icon md-svg-icon="icons/favorite.svg"></md-icon>
+              </md-button>
+              <md-button class="md-secondary" href="{{item.url}}" target="_blank">View recipe</md-button>
+            </md-card-actions>
+          </md-card>
+        </md-virtual-repeat-container>
+      </md-list>
+    </md-content>
+  </section>
+
+</div>
+{% endverbatim %}

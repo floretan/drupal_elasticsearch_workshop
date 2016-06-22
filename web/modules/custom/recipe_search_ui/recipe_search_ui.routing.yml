@@ -1,0 +1,8 @@
+
+recipe_search_ui.recipe_search_page_controller_page:
+  path: '/search'
+  defaults:
+    _controller: '\Drupal\recipe_search_ui\Controller\RecipeSearchUIPageController::page'
+    _title: 'Search'
+  requirements:
+    _permission: 'access content'

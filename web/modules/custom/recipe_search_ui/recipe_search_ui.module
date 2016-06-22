@@ -1,0 +1,27 @@
+<?php
+
+/**
+ * @file
+ * Contains recipe_search_ui.module.
+ */
+
+/**
+ * Prepares variables for HTML document templates.
+ */
+function recipe_search_ui_preprocess_html(&$variables) {
+
+  $variables['html_attributes']['ng-app'] = 'App';
+
+}
+
+/**
+ * Implements hook_theme().
+ */
+function recipe_search_ui_theme($existing, $type, $theme, $path) {
+  return [
+    'recipe_search_ui' => [
+      'template' => 'recipe_search_ui',
+      'variables' => [],
+    ],
+  ];
+}
