@@ -164,6 +164,36 @@ class RecipeSearchAPIController extends ControllerBase {
      * $data[] = ['label' => 'Bacon'];
      */
 
+    if ($input) {
+      $query = [
+        'index' => 'recipes',
+        'size' => 0,
+        'body' => [
+          'query' => [
+            'prefix' => [
+              'ingredients' => $input,
+            ]
+          ],
+          'aggs' => [
+            'ingredients' => [
+              'terms' => [
+                'field' => 'ingredients',
+                'include' => $input . '.*',
+                'size' => 5,
+              ]
+            ]
+          ]
+        ]
+      ];
+      $response = $this->client->search($query);
+
+      if ($response['aggregations']['ingredients']) {
+        foreach ($response['aggregations']['ingredients']['buckets'] as $bucket) {
+          $data[] = ['label' => $bucket['key']];
+        }
+      }
+    }
+
     /**
      * End of Task #5.
      */
