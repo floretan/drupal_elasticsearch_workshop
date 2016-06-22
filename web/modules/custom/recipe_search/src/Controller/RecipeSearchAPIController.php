@@ -91,6 +91,11 @@ class RecipeSearchAPIController extends ControllerBase {
               'field' => 'source'
             ],
           ],
+          'ingredients' => [
+            'terms' => [
+              'field' => 'ingredients'
+            ],
+          ],
         ],
       ],
       'from' => $from,
@@ -101,6 +106,14 @@ class RecipeSearchAPIController extends ControllerBase {
       $query['body']['post_filter'] = [
         'terms' => [
           'source' => $selected_sources,
+        ]
+      ];
+    }
+
+    if ($selected_ingredients) {
+      $query['body']['query']['bool']['must'][] = [
+        'terms' => [
+          'ingredients' => $selected_ingredients,
         ]
       ];
     }
