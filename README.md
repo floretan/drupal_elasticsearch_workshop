@@ -24,7 +24,7 @@ composer install
 
 Install Drupal using a simple sqlite database.
 ```
-drush site-install --db-url="sqlite://../database.sqlite"
+drush site-install config_installer
 ```
 
 Run Drupal with the PHP built-in server, by default it will be accessible under http://127.0.0.1:8888
