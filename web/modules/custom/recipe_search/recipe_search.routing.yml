@@ -1,0 +1,15 @@
+
+recipe_search.search:
+  path: '/api/search'
+  defaults:
+    _controller: '\Drupal\recipe_search\Controller\RecipeSearchAPIController::search'
+  requirements:
+    _permission: 'access content'
+
+recipe_search.suggest:
+  path: '/api/suggest/{input}'
+  defaults:
+    _controller: '\Drupal\recipe_search\Controller\RecipeSearchAPIController::suggest'
+    input: ''
+  requirements:
+    _permission: 'access content'
