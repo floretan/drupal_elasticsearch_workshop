@@ -74,9 +74,15 @@ class RecipeSearchAPIController extends ControllerBase {
       'index' => 'recipes',
       'body' => [
         'query' => [
-          'match' => [
-            // Search everywhere.
-            '_all' => $input,
+          'bool' => [
+            'must' => [
+              [
+                'match' => [
+                  // Search everywhere.
+                  '_all' => $input,
+                ]
+              ]
+            ]
           ]
         ],
         'aggs' => [
@@ -92,7 +98,11 @@ class RecipeSearchAPIController extends ControllerBase {
     ];
 
     if ($selected_sources) {
-      // TODO: modify query to filter values.
+      $query['body']['query']['bool']['must'][] = [
+        'terms' => [
+          'source' => $selected_sources,
+        ]
+      ];
     }
 
     /**
