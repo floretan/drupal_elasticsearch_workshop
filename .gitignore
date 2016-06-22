@@ -16,3 +16,6 @@ web/sites/*/files
 elasticsearch
 kibana
 datasets
+
+# Ignore the sqlite database.
+database.sqlite
