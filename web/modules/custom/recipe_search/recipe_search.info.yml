@@ -1,0 +1,4 @@
+name: Recipe Search
+description: Example module for our Elasticsearch workshop.
+type: module
+core: 8.x
