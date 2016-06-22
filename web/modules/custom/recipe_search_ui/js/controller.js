@@ -26,8 +26,8 @@ angular.module('App', ['ngMaterial', 'ngResource'])
 
       SearchEndpoint.query({
         input: newParams.input,
-        sources: Object.keys(newParams.sources).filter(function(key) { return newParams.sources[key]; }),
-        ingredients: Object.keys(newParams.ingredients).filter(function(key) { return newParams.ingredients[key]; }),
+        'sources[]': Object.keys(newParams.sources).filter(function(key) { return newParams.sources[key]; }),
+        'ingredients[]': Object.keys(newParams.ingredients).filter(function(key) { return newParams.ingredients[key]; }),
       }).$promise.then(function(response) {
         vm.searchResult.hits = response.hits;
         vm.searchResult.total = response.total;
