@@ -129,7 +129,9 @@ class RecipeSearchAPIController extends ControllerBase {
    * @return string
    *   Return Hello string.
    */
-  public function suggest($input) {
+  public function suggest(Request $request) {
+    $input = $request->query->get('input');
+
     $data = [];
 
     /**

@@ -7,9 +7,8 @@ recipe_search.search:
     _permission: 'access content'
 
 recipe_search.suggest:
-  path: '/api/suggest/{input}'
+  path: '/api/suggest'
   defaults:
     _controller: '\Drupal\recipe_search\Controller\RecipeSearchAPIController::suggest'
-    input: ''
   requirements:
     _permission: 'access content'
