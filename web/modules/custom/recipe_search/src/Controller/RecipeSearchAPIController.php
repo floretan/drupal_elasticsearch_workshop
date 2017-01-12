@@ -74,15 +74,26 @@ class RecipeSearchAPIController extends ControllerBase {
       'index' => 'recipes',
       'body' => [
         'query' => [
-          'match' => [
-            // Search everywhere.
-            '_all' => $input,
+          'bool' => [
+            'must' => [
+              [
+                'match' => [
+                  // Search everywhere.
+                  '_all' => $input,
+                ]
+              ]
+            ]
           ]
         ],
         'aggs' => [
           'sources' => [
             'terms' => [
               'field' => 'source'
+            ],
+          ],
+          'ingredients' => [
+            'significant_terms' => [
+              'field' => 'ingredients'
             ],
           ],
         ],
@@ -92,7 +103,19 @@ class RecipeSearchAPIController extends ControllerBase {
     ];
 
     if ($selected_sources) {
-      // TODO: modify query to filter values.
+      $query['body']['post_filter'] = [
+        'terms' => [
+          'source' => $selected_sources,
+        ]
+      ];
+    }
+
+    if ($selected_ingredients) {
+      $query['body']['query']['bool']['must'][] = [
+        'terms' => [
+          'ingredients' => $selected_ingredients,
+        ]
+      ];
     }
 
     /**
@@ -140,6 +163,36 @@ class RecipeSearchAPIController extends ControllerBase {
      * For example:
      * $data[] = ['label' => 'Bacon'];
      */
+
+    if ($input) {
+      $query = [
+        'index' => 'recipes',
+        'size' => 0,
+        'body' => [
+          'query' => [
+            'prefix' => [
+              'ingredients' => $input,
+            ]
+          ],
+          'aggs' => [
+            'ingredients' => [
+              'terms' => [
+                'field' => 'ingredients',
+                'include' => $input . '.*',
+                'size' => 5,
+              ]
+            ]
+          ]
+        ]
+      ];
+      $response = $this->client->search($query);
+
+      if ($response['aggregations']['ingredients']) {
+        foreach ($response['aggregations']['ingredients']['buckets'] as $bucket) {
+          $data[] = ['label' => $bucket['key']];
+        }
+      }
+    }
 
     /**
      * End of Task #5.

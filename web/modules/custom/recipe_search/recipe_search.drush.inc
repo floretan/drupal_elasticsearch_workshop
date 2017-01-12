@@ -52,6 +52,47 @@ function drush_recipe_search_import_recipes() {
 
   // Hint: You can see the current schema at http://localhost:9200/recipes/_mapping?pretty
 
+  $client->indices()->create([
+    'index' => $index_name,
+    'body' => [
+      'settings' => [
+        // We only want a single shard with no replica.
+        'number_of_shards' => 1,
+        'number_of_replicas' => 0,
+        'analysis' => [
+          'analyzer' => [
+            'filtered_ingredients' => [
+              'type' => 'standard',
+              'stopwords' => $irrelevant_ingredients,
+            ]
+          ]
+        ],
+      ],
+      'mappings' => [
+        $type_name => [
+          'properties' => [
+            // Parse english fields.
+            'name' => ['type' => 'string', 'analyzer' => 'english'],
+            'description' => ['type' => 'string', 'analyzer' => 'english'],
+            'recipeInstructions' => ['type' => 'string', 'analyzer' => 'english'],
+
+            // Use our custom analyzer for ingredients
+            'ingredients' => ['type' => 'string', 'analyzer' => 'filtered_ingredients'],
+
+            // The following fields don't need to be analyzed.
+            'source' => ['type' => 'string', 'index' => 'not_analyzed'],
+            'prepTime' => ['type' => 'string', 'index' => 'not_analyzed'],
+            'totalTime' => ['type' => 'string', 'index' => 'not_analyzed'],
+            'recipeCategory' => ['type' => 'string', 'index' => 'not_analyzed'],
+            'url' => ['type' => 'string', 'index' => 'not_analyzed'],
+            'image' => ['type' => 'string', 'index' => 'not_analyzed'],
+            'recipeCategory' => ['type' => 'string', 'index' => 'not_analyzed'],
+          ]
+        ]
+      ]
+    ]
+  ]);
+
   /**
    * End of TASK #2.
    */
@@ -65,7 +106,10 @@ function drush_recipe_search_import_recipes() {
        */
 
       $response = $client->index([
-        // Put the parameters here
+        'index' => $index_name,
+        'type' => $type_name,
+        'id' => $id,
+        'body' => $recipe,
       ]);
 
       /**
