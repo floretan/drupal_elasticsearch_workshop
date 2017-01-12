@@ -14,7 +14,7 @@ You should have the following installed on your system:
 
 Clone this repository
 ```
-git clone https://github.com/floretan/ddd_elasticsearch.git
+git clone https://github.com/floretan/drupal_elasticsearch_workshop.git
 ```
 
 Install composer dependencies. This will also call scripts to download Elasticsearch, Kibana and our sample dataset.
