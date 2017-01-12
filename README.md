@@ -7,6 +7,7 @@ This is the starting codebase for our Elasticsearch workshop.
 You should have the following installed on your system:
 
 - PHP and composer
+- SQLite (test by running ```php --info | grep "SQLite Library"```, you should have at least version 3)
 - A recent version of Java (Java 8 recommended)
 
 ## Setup
