@@ -25,6 +25,7 @@ composer install
 
 Install Drupal using a simple sqlite database.
 ```
+cd web
 drush site-install config_installer
 ```
 
